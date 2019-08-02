@@ -9,7 +9,7 @@
     "48": "icons/plex-pace-icon.png"
   },
 
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "storage"],
   "browser_action": {
     "default_icon": "icons/plex-pace-icon.png",
     "default_title": "Plex Pace",

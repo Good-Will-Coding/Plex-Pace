@@ -1,7 +1,7 @@
 html,
 body {
   width: 100px;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 0.75rem;
   background-color: rgb(243, 241, 241);
 }
@@ -18,7 +18,7 @@ body {
   cursor: pointer;
   color: white;
   background-color: rgb(65, 65, 65);
-  border: 1px solid black;
+  border: 1px solid rgb(0, 0, 0);
 }
 
 .button:hover {
@@ -26,6 +26,5 @@ body {
 }
 
 .normal {
-    color: #E5A00D;
-
+  color: #e5a00d;
 }
