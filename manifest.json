@@ -6,13 +6,19 @@
   "description": "",
   "homepage_url": "https://github.com/Good-Will-Coding/Plex-Pace",
   "icons": {
-    "48": ""
+    "48": "icons/plex-pace-icon.png"
   },
 
   "permissions": ["activeTab"],
   "browser_action": {
-    "default_icon": "",
+    "default_icon": "icons/plex-pace-icon.png",
     "default_title": "Plex Pace",
-    "default_popup": ""
-  }
+    "default_popup": "popup/select_speed.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://app.plex.tv//*"],
+      "js": ["popup/select_speed.js"]
+    }
+  ]
 }

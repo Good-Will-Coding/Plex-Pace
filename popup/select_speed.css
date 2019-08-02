@@ -1,0 +1,31 @@
+html,
+body {
+  width: 100px;
+  font-family: 'Rubik', sans-serif;
+  font-size: 0.75rem;
+  background-color: rgb(243, 241, 241);
+}
+
+.hidden {
+  display: none;
+}
+
+.button {
+  margin: 3% auto;
+  padding: 4px;
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: white;
+  background-color: rgb(65, 65, 65);
+  border: 1px solid black;
+}
+
+.button:hover {
+  background-color: rgb(26, 26, 26);
+}
+
+.normal {
+    color: #E5A00D;
+
+}
