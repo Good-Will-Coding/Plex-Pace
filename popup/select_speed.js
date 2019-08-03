@@ -1,13 +1,19 @@
 (function() {
+  const selectSpeed = e => {
+    const speed = e.target.id;
+    changeSpeed(speed);
+  };
+
   const changeSpeed = chosenRate => {
     const executeSpeedChange = `document.getElementsByTagName('video')[0].playbackRate = ${chosenRate}`;
 
+    // Execute script to change plex video speed
     const executing = browser.tabs.executeScript({
       code: executeSpeedChange
     });
 
     const onExecuted = result => {
-      console.log(`We executed in all subframes`);
+      console.log(`Video playback speed is now ${chosenRate}`);
       changeSelectedSpeedBg(chosenRate);
     };
 
@@ -18,44 +24,26 @@
     executing.then(onExecuted, onError);
   };
 
-  const selectSpeed = e => {
-    let speed = e.target.id;
-    switch (speed) {
-      case ".25":
-        changeSpeed(speed);
-        break;
-      case ".5":
-        changeSpeed(speed);
-        break;
-      case ".75":
-        changeSpeed(speed);
-        break;
-      case "1":
-        changeSpeed(speed);
-        break;
-      case "1.25":
-        changeSpeed(speed);
-        break;
-      case "1.5":
-        changeSpeed(speed);
-        break;
-      case "1.75":
-        changeSpeed(speed);
-        break;
-      case "2":
-        changeSpeed(speed);
-        break;
-      default:
-        return false;
-    }
-  };
-
   const changeSelectedSpeedBg = id => {
     const chosenSpeedID = document.getElementById(`${id}`);
+
+    // Update selected background when new speed chosen
+    btnBgReset();
     chosenSpeedID.style.background = "black";
   };
 
+  const btnBgReset = () => {
+    const btnBg = document.querySelectorAll(".button");
+    btnBg.forEach(btn => {
+      if ((btn.style.background = "black")) {
+        btn.style.background = "rgb(65, 65, 65)";
+      }
+    });
+  };
+
+  // Initialize speed change on click
   const getSpeed = document.getElementById("popup-content");
+
   const setSpeedOnChange = () => {
     getSpeed.addEventListener("click", selectSpeed);
   };
@@ -66,7 +54,6 @@
 /* TODO
 
 KEY SHORTCUTS
-SELECTED SPEED BACKGROUND - PERSISTANT - FIX MULTIPLE BG CHANGING
 CUSTOM SPEED
 
 */

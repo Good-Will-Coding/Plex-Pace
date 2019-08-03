@@ -8,6 +8,11 @@
   "icons": {
     "48": "icons/plex-pace-icon.png"
   },
+  "applications": {
+    "gecko": {
+      "id": "addon@example.com"
+      }
+    },
 
   "permissions": ["activeTab", "storage"],
   "browser_action": {
