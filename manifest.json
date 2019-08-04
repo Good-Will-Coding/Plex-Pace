@@ -8,7 +8,7 @@
   "icons": {
     "48": "icons/plex-pace-icon.png"
   },
-  "permissions": ["activeTab", "storage"],
+  "permissions": ["activeTab", "storage", "tab"],
   "browser_action": {
     "default_icon": "icons/plex-pace-icon.png",
     "default_title": "Plex Pace",
@@ -19,5 +19,22 @@
       "matches": ["*://app.plex.tv//*"],
       "js": ["popup/select_speed.js"]
     }
-  ]
+  ],
+  "background": {
+    "scripts": ["background/key-binding-speed.js"]
+  },
+  "commands": {
+    "toggle-feature": {
+      "suggested_key": {
+        "default": "Alt+Shift+U",
+        "linux": "Ctrl+Shift+U"
+      },
+      "description": "Send a 'toggle-feature' event to the extension"
+    },
+    "do-another-thing": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      }
+    }
+  }
 }

@@ -83,6 +83,21 @@
 
     // register the key-up handler
     document.addEventListener("keyup", doc_keyUp, false);
+
+    // Retrieve current video speed from Plex
+    const receiveSpeed = resultsArray => {
+        console.log(resultsArray[0]);
+        currentVideoSpeed = resultsArray[0]
+    }
+    
+    const retrieveCurrentVideoSpeed = browser.tabs.executeScript(
+        {
+            code: "document.getElementsByTagName('video')[0].playbackRate"
+        },
+        receiveSpeed
+    );
+
+
 })();
 
 /* TODO
