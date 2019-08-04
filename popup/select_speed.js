@@ -49,11 +49,11 @@
         }
     };
 
-    const speedDecrement = () => {
+    export const speedDecrement = () => {
         currentVideoSpeed = currentVideoSpeed - 0.1;
         executeSpeedChanges(currentVideoSpeed);
     };
-    const speedIncrement = () => {
+    export const speedIncrement = () => {
         currentVideoSpeed = currentVideoSpeed + 0.1;
         executeSpeedChanges(currentVideoSpeed);
     };
@@ -89,7 +89,7 @@
         console.log(resultsArray[0]);
         currentVideoSpeed = resultsArray[0]
     }
-    
+
     const retrieveCurrentVideoSpeed = browser.tabs.executeScript(
         {
             code: "document.getElementsByTagName('video')[0].playbackRate"

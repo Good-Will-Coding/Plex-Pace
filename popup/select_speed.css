@@ -40,3 +40,74 @@ body {
   background-color: rgb(65, 65, 65);
   border: 1px solid rgb(0, 0, 0);
 }
+
+/*  Custom Speed */
+.custom-speed-content {
+  /* display: flex; */
+  margin: 3% auto;
+  padding: 4px;
+  text-align: center;
+  color: white;
+  background-color: rgb(65, 65, 65);
+}
+
+.custom-btn:hover {
+  background-color: rgb(26, 26, 26);
+}
+
+.custom-speed {
+  font-size: 1.4em;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  background-color: rgb(65, 65, 65);
+  display: flex;
+  padding: 0px 10px;
+}
+
+li {
+  display: inline;
+  margin: 0px 10px;
+}
+
+.btn-left {
+  text-align: center;
+  max-width: 50px;
+  font-size: 2.5em;
+  padding: 0px 2px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #e5a00d;
+  background-color: rgb(65, 65, 65);
+  border: 1px solid rgb(122, 122, 122);
+}
+
+.btn-right {
+  padding: 0px 2px;
+
+  text-align: center;
+  max-width: 50px;
+  font-size: 2.5em;
+  font-weight: bold;
+  cursor: pointer;
+  color: #e5a00d;
+  background-color: rgb(65, 65, 65);
+  border: 1px solid rgb(122, 122, 122);
+}
+
+.current-speed {
+  position: absolute;
+  /* left: 5px; */
+  bottom: 30px;
+  left: 53px;
+}
+
+#current-custom-speed {
+  left: 5px;
+}
+
+.key-shortcut {
+  /* text-align: center; */
+}

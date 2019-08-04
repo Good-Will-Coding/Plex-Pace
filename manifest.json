@@ -26,8 +26,8 @@
   "commands": {
     "toggle-feature": {
       "suggested_key": {
-        "default": "Alt+Shift+U",
-        "linux": "Ctrl+Shift+U"
+        "default": "Alt+Shift+Left",
+        "linux": "Ctrl+Shift+Left"
       },
       "description": "Send a 'toggle-feature' event to the extension"
     },

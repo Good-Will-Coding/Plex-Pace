@@ -1,5 +1,8 @@
-// browser.commands.onCommand.addListener(function(command) {
-//     if (command == "toggle-feature") {
-//       console.log("toggling the feature!");
-//     }
-//   });
+import { speedDecrement, speedIncrement } from '../popup/select_speed'
+
+browser.commands.onCommand.addListener(command => {
+    if (command === "toggle-feature") {
+        speedDecrement();
+        console.log("toggling the feature!");
+    }
+  });
