@@ -1,27 +1,13 @@
 (function () {
+    let currentVideoSpeed;
+
     const selectSpeed = e => {
         const speed = e.target.id;
         changeSpeed(speed);
     };
 
     const changeSpeed = chosenRate => {
-        const executeSpeedChange = `document.getElementsByTagName('video')[0].playbackRate = ${chosenRate}`;
-
-        // Execute script to change plex video speed
-        const executing = browser.tabs.executeScript({
-            code: executeSpeedChange
-        });
-
-        const onExecuted = result => {
-            console.log(`Video playback speed is now ${chosenRate}`);
-            changeSelectedSpeedBg(chosenRate);
-        };
-
-        const onError = error => {
-            console.log(`Error: ${error}`);
-        };
-
-        executing.then(onExecuted, onError);
+        executeSpeedChanges(chosenRate);
     };
 
     const changeSelectedSpeedBg = id => {
@@ -29,7 +15,9 @@
 
         // Update selected background when new speed chosen
         btnBgReset();
-        chosenSpeedID.style.background = "black";
+        if (chosenSpeedID) {
+            chosenSpeedID.style.background = "black";
+        }
     };
 
     const btnBgReset = () => {
@@ -49,6 +37,52 @@
     };
 
     setSpeedOnChange();
+
+    // KEY BINDINGS
+
+    const doc_keyUp = e => {
+        if (e.ctrlKey && e.keyCode == 37) {
+            speedDecrement();
+        } else if (e.ctrlKey && e.keyCode == 39) {
+            console.log("yup");
+            speedIncrement();
+        }
+    };
+
+    const speedDecrement = () => {
+        currentVideoSpeed = currentVideoSpeed - 0.1;
+        executeSpeedChanges(currentVideoSpeed);
+    };
+    const speedIncrement = () => {
+        currentVideoSpeed = currentVideoSpeed + 0.1;
+        executeSpeedChanges(currentVideoSpeed);
+    };
+
+    // Execute speed changes via click handler or keybindings
+
+    const executeSpeedChanges = speedRate => {
+        const executeSpeedChange = `document.getElementsByTagName('video')[0].playbackRate = ${speedRate}`;
+
+        // Execute script to change plex video speed
+        const executing = browser.tabs.executeScript({
+            code: executeSpeedChange
+        });
+
+        const onExecuted = result => {
+            console.log(`Video playback speed is now ${speedRate}`);
+            currentVideoSpeed = speedRate;
+            changeSelectedSpeedBg(speedRate);
+        };
+
+        const onError = error => {
+            console.log(`Error: ${error}`);
+        };
+
+        executing.then(onExecuted, onError);
+    };
+
+    // register the key-up handler
+    document.addEventListener("keyup", doc_keyUp, false);
 })();
 
 /* TODO

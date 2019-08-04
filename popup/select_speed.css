@@ -28,3 +28,15 @@ body {
 .normal {
   color: #e5a00d;
 }
+
+#custom-input {
+  margin: 3% auto;
+  padding: 4px;
+  max-width: 90px;
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: white;
+  background-color: rgb(65, 65, 65);
+  border: 1px solid rgb(0, 0, 0);
+}
