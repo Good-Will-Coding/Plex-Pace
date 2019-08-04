@@ -1,5 +1,7 @@
 (function () {
     let currentVideoSpeed;
+    const customSpeedDisplay = document.getElementById('current-custom-speed');
+
 
     const selectSpeed = e => {
         const speed = e.target.id;
@@ -49,11 +51,11 @@
         }
     };
 
-    export const speedDecrement = () => {
+     const speedDecrement = () => {
         currentVideoSpeed = currentVideoSpeed - 0.1;
         executeSpeedChanges(currentVideoSpeed);
     };
-    export const speedIncrement = () => {
+     const speedIncrement = () => {
         currentVideoSpeed = currentVideoSpeed + 0.1;
         executeSpeedChanges(currentVideoSpeed);
     };
@@ -71,6 +73,8 @@
         const onExecuted = result => {
             console.log(`Video playback speed is now ${speedRate}`);
             currentVideoSpeed = speedRate;
+            customSpeedDisplay.innerHTML = currentVideoSpeed;
+
             changeSelectedSpeedBg(speedRate);
         };
 
@@ -86,8 +90,9 @@
 
     // Retrieve current video speed from Plex
     const receiveSpeed = resultsArray => {
-        console.log(resultsArray[0]);
+        console.log('worked', customSpeedDisplay)
         currentVideoSpeed = resultsArray[0]
+        customSpeedDisplay.innerHTML = currentVideoSpeed;
     }
 
     const retrieveCurrentVideoSpeed = browser.tabs.executeScript(
