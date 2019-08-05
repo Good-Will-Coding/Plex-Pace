@@ -8,4 +8,4 @@ Plex Place is a Firefox extension for controlling the speed of the Plex Web App 
 
 ### Contributing
 
-Contributions to this project are always welcome.
+Contributing to this project is always welcomed.
