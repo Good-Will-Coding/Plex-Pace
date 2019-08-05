@@ -70,6 +70,7 @@ ul {
 li {
   display: inline;
   margin: 0px 10px;
+  /* padding: 0px 30px; */
 }
 
 .btn-left {
@@ -98,6 +99,7 @@ li {
 }
 
 .current-speed {
+  font-size: 1.5em;
   position: absolute;
   /* left: 5px; */
   bottom: 30px;
@@ -106,6 +108,8 @@ li {
 
 #current-custom-speed {
   left: 5px;
+  /* margin: 0px 20px; */
+  text-align: center;
 }
 
 .key-shortcut {

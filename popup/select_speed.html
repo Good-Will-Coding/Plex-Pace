@@ -12,21 +12,24 @@
   </head>
   <body>
     <div id="popup-content">
-      <div class="button" id=".25">.25</div>
-      <div class="button" id=".5">.5</div>
-      <div class="button" id=".75">.75</div>
-      <div class="button normal" id="1">Normal</div>
-      <div class="button" id="1.25">1.25</div>
-      <div class="button" id="1.5">1.5</div>
-      <div class="button" id="1.75">1.75</div>
-      <div class="button" id="2">2</div>
+        <div id="main-speed-section">
+                <div class="button" id="0.25">.25</div>
+                <div class="button" id="0.5">.5</div>
+                <div class="button" id="0.75">.75</div>
+                <div class="button normal" id="1.0">Normal</div>
+                <div class="button" id="1.25">1.25</div>
+                <div class="button" id="1.50">1.5</div>
+                <div class="button" id="1.75">1.75</div>
+                <div class="button" id="2.0">2</div>
+        </div>
+     
       <div class="custom-speed-content">
         <div class="custom-speed">Custom Speed</div>
         <div>
           <ul>
-            <li class="custom-btn btn-left"><</li>
+            <li class="custom-btn btn-left" id="btn-left"><</li>
             <!-- <div class="key-shortcut">Alt+Shift+Left</div> -->
-            <li class="custom-btn btn-right">></li>
+            <li class="custom-btn btn-right" id="btn-right">></li>
             <!-- <div class="key-shortcut">Alt+Shift+Right</div> -->
           </ul>
           <div class="current-speed"><span id="current-custom-speed"></span></div>
