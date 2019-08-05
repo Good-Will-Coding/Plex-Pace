@@ -21,7 +21,7 @@
     }
   ],
   "background": {
-    "scripts": ["background/key-binding-speed.js"]
+    "scripts": ["popup/select_speed.js"]
   },
   "commands": {
     "toggle-feature": {
@@ -38,3 +38,5 @@
     }
   }
 }
+
+

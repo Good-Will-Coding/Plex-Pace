@@ -15,12 +15,11 @@
     };
 
     const speedDecrement = () => {
-        currentVideoSpeed = +(currentVideoSpeed - 0.1).toFixed(2);
+        currentVideoSpeed = +(currentVideoSpeed - 0.10).toFixed(2);
         executeSpeedChanges(currentVideoSpeed);
     };
     const speedIncrement = () => {
-        currentVideoSpeed = +(currentVideoSpeed + 0.1).toFixed(2);
-
+        currentVideoSpeed = +(currentVideoSpeed + 0.10).toFixed(2);
         executeSpeedChanges(currentVideoSpeed);
     };
 
@@ -29,7 +28,7 @@
     const executeSpeedChanges = speedRate => {
         const executeSpeedChange = `document.getElementsByTagName('video')[0].playbackRate = ${speedRate}`;
 
-        // Execute script to change plex video speed
+        // Executing script to change plex video speed
         const executing = browser.tabs.executeScript({
             code: executeSpeedChange
         });
@@ -38,7 +37,6 @@
             console.log(`Video playback speed is now ${speedRate}`);
             currentVideoSpeed = speedRate;
             customSpeedDisplay.innerHTML = currentVideoSpeed;
-
             changeSelectedSpeedBg(speedRate);
         };
 
@@ -63,7 +61,7 @@
     const btnBgReset = () => {
         btnBg.forEach(btn => {
             if (btn.classList.contains("btn-active")) {
-                btn.classList.add("btn-inactive");
+                btn.classList.remove("btn-active");
             }
         });
     };
@@ -92,12 +90,12 @@
         }
     };
 
-
     // INITIALIZE EXTENSION 
 
     // Retrieve current video speed from Plex
     const receiveSpeed = resultsArray => {
         currentVideoSpeed = resultsArray[0];
+        console.log(currentVideoSpeed)
         customSpeedDisplay.innerHTML = currentVideoSpeed;
         setSpeedBgOnStart();
     };
@@ -123,9 +121,3 @@
     setSpeedOnChange();
 })();
 
-/* TODO
-
-KEY SHORTCUTS
-CUSTOM SPEED
-
-*/
