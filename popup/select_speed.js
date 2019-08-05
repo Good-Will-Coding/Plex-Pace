@@ -1,105 +1,126 @@
-(function() {
-  let currentVideoSpeed;
-  const customSpeedDisplay = document.getElementById("current-custom-speed");
-  const getSpeed = document.getElementById("main-speed-section");
-  const getCustomSpeedLeft = document.getElementById("btn-left");
-  const getCustomSpeedRight = document.getElementById("btn-right");
-
-  const selectSpeed = e => {
-    const speed = e.target.id;
-    executeSpeedChanges(speed);
-    // changeSpeed(speed);
-  };
-
-  const changeSelectedSpeedBg = id => {
-    const chosenSpeedID = document.getElementById(`${id}`);
-
-    // Update selected background when new speed chosen
-    btnBgReset();
-    if (chosenSpeedID) {
-      chosenSpeedID.style.background = "black";
-    }
-  };
-
-  const btnBgReset = () => {
+(function () {
+    let currentVideoSpeed;
+    const customSpeedDisplay = document.getElementById("current-custom-speed");
+    const getSpeed = document.getElementById("main-speed-section");
+    const getCustomSpeedLeft = document.getElementById("btn-left");
+    const getCustomSpeedRight = document.getElementById("btn-right");
+    const customSectionBg = document.getElementById("custom-speed-content");
     const btnBg = document.querySelectorAll(".button");
-    btnBg.forEach(btn => {
-      if ((btn.style.background = "black")) {
-        btn.style.background = "rgb(65, 65, 65)";
-      }
-    });
-  };
+    const customUl = document.getElementById("custom-ul");
 
-  // KEY BINDINGS
-
-  const doc_keyUp = e => {
-    if (e.ctrlKey && e.keyCode == 37) {
-      speedDecrement();
-    } else if (e.ctrlKey && e.keyCode == 39) {
-      console.log("yup");
-      speedIncrement();
-    }
-  };
-
-  const speedDecrement = () => {
-    currentVideoSpeed = +(currentVideoSpeed - 0.10).toFixed(2);
-    executeSpeedChanges(currentVideoSpeed);
-  };
-  const speedIncrement = () => {
-    currentVideoSpeed = +(currentVideoSpeed + 0.10).toFixed(2);
-
-    executeSpeedChanges(currentVideoSpeed);
-  };
-
-  // Execute speed changes via click handler or keybindings
-
-  const executeSpeedChanges = speedRate => {
-    //   console.log('rounded', +(speedRate).toFixed(2))
-    const executeSpeedChange = `document.getElementsByTagName('video')[0].playbackRate = ${speedRate}`;
-
-    // Execute script to change plex video speed
-    const executing = browser.tabs.executeScript({
-      code: executeSpeedChange
-    });
-
-    const onExecuted = result => {
-      console.log(`Video playback speed is now ${speedRate}`);
-      currentVideoSpeed = speedRate;
-      customSpeedDisplay.innerHTML = currentVideoSpeed;
-
-      changeSelectedSpeedBg(speedRate);
+    // SETTING SPEED 
+    const selectSpeed = e => {
+        const speed = e.target.id;
+        executeSpeedChanges(speed);
     };
 
-    const onError = error => {
-      console.log(`Error: ${error}`);
+    const speedDecrement = () => {
+        currentVideoSpeed = +(currentVideoSpeed - 0.1).toFixed(2);
+        executeSpeedChanges(currentVideoSpeed);
+    };
+    const speedIncrement = () => {
+        currentVideoSpeed = +(currentVideoSpeed + 0.1).toFixed(2);
+
+        executeSpeedChanges(currentVideoSpeed);
     };
 
-    executing.then(onExecuted, onError);
-  };
+    // Execute speed changes via click handler or keybindings
 
-  // register the key-up handler
-  document.addEventListener("keyup", doc_keyUp, false);
+    const executeSpeedChanges = speedRate => {
+        const executeSpeedChange = `document.getElementsByTagName('video')[0].playbackRate = ${speedRate}`;
 
-  // Retrieve current video speed from Plex
-  const receiveSpeed = resultsArray => {
-    currentVideoSpeed = resultsArray[0];
-    customSpeedDisplay.innerHTML = currentVideoSpeed;
-  };
+        // Execute script to change plex video speed
+        const executing = browser.tabs.executeScript({
+            code: executeSpeedChange
+        });
 
-  const retrieveCurrentVideoSpeed = browser.tabs.executeScript(
-    {
-      code: "document.getElementsByTagName('video')[0].playbackRate"
-    },
-    receiveSpeed
-  );
+        const onExecuted = result => {
+            console.log(`Video playback speed is now ${speedRate}`);
+            currentVideoSpeed = speedRate;
+            customSpeedDisplay.innerHTML = currentVideoSpeed;
 
-  const setSpeedOnChange = () => {
-    getSpeed.addEventListener("click", selectSpeed);
-    getCustomSpeedLeft.addEventListener("click", speedDecrement);
-    getCustomSpeedRight.addEventListener("click", speedIncrement);
-  };
+            changeSelectedSpeedBg(speedRate);
+        };
 
-  setSpeedOnChange();
+        const onError = error => {
+            console.log(`Error: ${error}`);
+        };
+
+        executing.then(onExecuted, onError);
+    };
+
+    // CONFIGURING SELECTED SPEED BACKGROUNDS
+    const changeSelectedSpeedBg = id => {
+        const chosenSpeedID = document.getElementById(`${id}`);
+
+        // Update selected background when new speed chosen
+        btnBgReset();
+        if (chosenSpeedID) {
+            chosenSpeedID.classList.add("btn-active");
+        }
+    };
+
+    const btnBgReset = () => {
+        btnBg.forEach(btn => {
+            if (btn.classList.contains("btn-active")) {
+                btn.classList.add("btn-inactive");
+            }
+        });
+    };
+
+    const setSpeedBgOnStart = () => {
+        btnBg.forEach(btn => {
+            if (currentVideoSpeed == btn.id) {
+                btn.classList.add("btn-active");
+                console.log("success");
+            }
+        });
+
+        if (currentVideoSpeed == customSpeedDisplay.innerHTML) {
+            customSectionBg.style.background = "rgb(26, 26, 26)";
+            customUl.classList.add("custom-btn-active");
+        }
+    };
+
+    // KEY BINDINGS
+
+    const doc_keyUp = e => {
+        if (e.ctrlKey && e.keyCode == 37) {
+            speedDecrement();
+        } else if (e.ctrlKey && e.keyCode == 39) {
+            speedIncrement();
+        }
+    };
+
+
+    // INITIALIZE EXTENSION 
+
+    // Retrieve current video speed from Plex
+    const receiveSpeed = resultsArray => {
+        currentVideoSpeed = resultsArray[0];
+        customSpeedDisplay.innerHTML = currentVideoSpeed;
+        setSpeedBgOnStart();
+    };
+
+    const retrieveCurrentVideoSpeed = browser.tabs.executeScript(
+        {
+            code: "document.getElementsByTagName('video')[0].playbackRate"
+        },
+        receiveSpeed
+    );
+
+    const setSpeedOnChange = () => {
+        getSpeed.addEventListener("click", selectSpeed);
+        getCustomSpeedLeft.addEventListener("click", speedDecrement);
+        getCustomSpeedRight.addEventListener("click", speedIncrement);
+        const getKeyShortCuts = document.addEventListener(
+            "keyup",
+            doc_keyUp,
+            false
+        );
+    };
+
+    setSpeedOnChange();
 })();
 
 /* TODO

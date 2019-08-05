@@ -21,6 +21,18 @@ body {
   border: 1px solid rgb(0, 0, 0);
 }
 
+.btn-active {
+  background-color: rgb(26, 26, 26);
+}
+
+.custom-btn-active {
+  background-color: rgb(26, 26, 26);
+}
+
+.btn-inactive {
+  background-color: rgb(65, 65, 65);
+}
+
 .button:hover {
   background-color: rgb(26, 26, 26);
 }
@@ -42,7 +54,7 @@ body {
 }
 
 /*  Custom Speed */
-.custom-speed-content {
+#custom-speed-content {
   /* display: flex; */
   margin: 3% auto;
   padding: 4px;
