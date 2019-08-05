@@ -19,24 +19,7 @@
       "matches": ["*://app.plex.tv//*"],
       "js": ["popup/select_speed.js"]
     }
-  ],
-  "background": {
-    "scripts": ["popup/select_speed.js"]
-  },
-  "commands": {
-    "toggle-feature": {
-      "suggested_key": {
-        "default": "Alt+Shift+Left",
-        "linux": "Ctrl+Shift+Left"
-      },
-      "description": "Send a 'toggle-feature' event to the extension"
-    },
-    "do-another-thing": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+Y"
-      }
-    }
-  }
+  ]
 }
 
 

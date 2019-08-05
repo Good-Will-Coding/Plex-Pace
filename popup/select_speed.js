@@ -19,6 +19,7 @@
         executeSpeedChanges(currentVideoSpeed);
     };
     const speedIncrement = () => {
+        console.log('current', currentVideoSpeed)
         currentVideoSpeed = +(currentVideoSpeed + 0.10).toFixed(2);
         executeSpeedChanges(currentVideoSpeed);
     };
@@ -26,6 +27,7 @@
     // Execute speed changes via click handler or keybindings
 
     const executeSpeedChanges = speedRate => {
+        console.log('clicked speed', speedRate)
         const executeSpeedChange = `document.getElementsByTagName('video')[0].playbackRate = ${speedRate}`;
 
         // Executing script to change plex video speed
@@ -70,7 +72,6 @@
         btnBg.forEach(btn => {
             if (currentVideoSpeed == btn.id) {
                 btn.classList.add("btn-active");
-                console.log("success");
             }
         });
 
@@ -95,9 +96,13 @@
     // Retrieve current video speed from Plex
     const receiveSpeed = resultsArray => {
         currentVideoSpeed = resultsArray[0];
-        console.log(currentVideoSpeed)
-        customSpeedDisplay.innerHTML = currentVideoSpeed;
-        setSpeedBgOnStart();
+        if (currentVideoSpeed === 1) {
+            customSpeedDisplay.innerHTML = '1.0';
+        } else {
+            customSpeedDisplay.innerHTML = currentVideoSpeed;
+            setSpeedBgOnStart();
+        }
+       
     };
 
     const retrieveCurrentVideoSpeed = browser.tabs.executeScript(
