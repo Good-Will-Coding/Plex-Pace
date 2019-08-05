@@ -19,15 +19,12 @@
         executeSpeedChanges(currentVideoSpeed);
     };
     const speedIncrement = () => {
-        console.log('current', currentVideoSpeed)
-        currentVideoSpeed = +(currentVideoSpeed + 0.10).toFixed(2);
+        currentVideoSpeed = (parseFloat(currentVideoSpeed) + parseFloat(0.10)).toFixed(2);
         executeSpeedChanges(currentVideoSpeed);
     };
-
     // Execute speed changes via click handler or keybindings
 
     const executeSpeedChanges = speedRate => {
-        console.log('clicked speed', speedRate)
         const executeSpeedChange = `document.getElementsByTagName('video')[0].playbackRate = ${speedRate}`;
 
         // Executing script to change plex video speed

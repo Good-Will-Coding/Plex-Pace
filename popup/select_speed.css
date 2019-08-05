@@ -29,10 +29,6 @@ body {
   background-color: rgb(26, 26, 26);
 }
 
-.btn-inactive {
-  background-color: rgb(65, 65, 65);
-}
-
 .button:hover {
   background-color: rgb(26, 26, 26);
 }
