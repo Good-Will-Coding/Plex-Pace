@@ -37,7 +37,7 @@
     const onExecuted = result => {
       console.log(`Video playback speed is now ${speedRate}`);
       currentVideoSpeed = speedRate;
-      customSpeedDisplay.innerHTML = currentVideoSpeed;
+      customSpeedDisplay.textContent = currentVideoSpeed;
       changeSelectedSpeedBg(speedRate);
       setExtensionIconSpeed(speedRate);
     };
@@ -102,9 +102,9 @@
   const receiveSpeed = resultsArray => {
     currentVideoSpeed = resultsArray[0];
     if (currentVideoSpeed === 1) {
-      customSpeedDisplay.innerHTML = "1.0";
+      customSpeedDisplay.textContent = "1.0";
     } else {
-      customSpeedDisplay.innerHTML = currentVideoSpeed;
+      customSpeedDisplay.textContent = currentVideoSpeed;
       setSpeedBgOnStart();
     }
   };
