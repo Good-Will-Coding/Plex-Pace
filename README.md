@@ -8,11 +8,11 @@ Plex Pace is a Firefox extension for controlling the speed of the Plex Web App p
 
 ### Testing & Debugging
 
-MDN provides a wonderful article for running add-ons temporarily for testing purposes.
+MDN provides a wonderful article for running add-ons. temporarily for testing purposes.
 https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Temporary_Installation_in_Firefox
 
 Simply clone this project and follow the instructions provided to get up and running.
 
 ### Contributing
 
-Contributing to this project is always welcomed.
+Feel free to contribute to this project.
