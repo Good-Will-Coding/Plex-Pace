@@ -119,6 +119,12 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
     receiveSpeed
   );
 
+  await browser.tabs.executeScript(
+      {
+        file: "../injections/loadedDataListener.js"
+      }
+  );
+
   const setSpeedOnChange = () => {
     getSpeed.addEventListener("click", selectSpeed);
     getCustomSpeedLeft.addEventListener("click", speedDecrement);
