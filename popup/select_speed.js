@@ -36,7 +36,7 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
       code: executeSpeedChange
     });
 
-    const onExecuted = async result => {
+    const onExecuted = async () => {
       console.log(`Video playback speed is now ${speedRate}`);
       currentVideoSpeed = speedRate;
       customSpeedDisplay.textContent = currentVideoSpeed;
@@ -112,7 +112,7 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
     }
   };
 
-  const retrieveCurrentVideoSpeed = browser.tabs.executeScript(
+  await browser.tabs.executeScript(
     {
       code: "document.getElementsByTagName('video')[0].playbackRate"
     },
@@ -129,7 +129,7 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
     getSpeed.addEventListener("click", selectSpeed);
     getCustomSpeedLeft.addEventListener("click", speedDecrement);
     getCustomSpeedRight.addEventListener("click", speedIncrement);
-    const getKeyShortCuts = document.addEventListener(
+    document.addEventListener(
       "keyup",
       doc_keyUp,
       false
