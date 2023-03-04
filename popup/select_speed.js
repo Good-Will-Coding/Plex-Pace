@@ -2,16 +2,16 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
 
 (async function () {
   let currentVideoSpeed;
-  const customSpeedDisplay = document.getElementById("current-custom-speed");
-  const getSpeed = document.getElementById("main-speed-section");
-  const getCustomSpeedLeft = document.getElementById("btn-left");
-  const getCustomSpeedRight = document.getElementById("btn-right");
-  const customSectionBg = document.getElementById("custom-speed-content");
-  const btnBg = document.querySelectorAll(".button");
-  const customUl = document.getElementById("custom-ul");
+  const customSpeedDisplay = document.getElementById('current-custom-speed');
+  const getSpeed = document.getElementById('main-speed-section');
+  const getCustomSpeedLeft = document.getElementById('btn-left');
+  const getCustomSpeedRight = document.getElementById('btn-right');
+  const customSectionBg = document.getElementById('custom-speed-content');
+  const btnBg = document.querySelectorAll('.button');
+  const customUl = document.getElementById('custom-ul');
 
   // SETTING SPEED
-  const selectSpeed = e => {
+  const selectSpeed = (e) => {
     const speed = e.target.id;
     executeSpeedChanges(speed);
   };
@@ -21,19 +21,17 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
     executeSpeedChanges(currentVideoSpeed);
   };
   const speedIncrement = () => {
-    currentVideoSpeed = (
-      parseFloat(currentVideoSpeed) + parseFloat(0.1)
-    ).toFixed(2);
+    currentVideoSpeed = (parseFloat(currentVideoSpeed) + parseFloat(0.1)).toFixed(2);
     executeSpeedChanges(currentVideoSpeed);
   };
   // Execute speed changes via click handler or keybindings
 
-  const executeSpeedChanges = speedRate => {
+  const executeSpeedChanges = (speedRate) => {
     const executeSpeedChange = `document.getElementsByTagName('video')[0].playbackRate = ${speedRate}`;
 
     // Executing script to change plex video speed
     const executing = browser.tabs.executeScript({
-      code: executeSpeedChange
+      code: executeSpeedChange,
     });
 
     const onExecuted = async () => {
@@ -42,10 +40,12 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
       customSpeedDisplay.textContent = currentVideoSpeed;
       changeSelectedSpeedBg(speedRate);
       setExtensionIconSpeed(speedRate);
-      await browser.storage.local.set({'plex-pace-last-speed-rate': speedRate});
+      await browser.storage.local.set({
+        'plex-pace-last-speed-rate': speedRate,
+      });
     };
 
-    const onError = error => {
+    const onError = (error) => {
       console.log(`Error: ${error}`);
     };
 
@@ -53,45 +53,45 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
   };
 
   // CONFIGURE BADGE ICON TO DISPLAY SPEED TEXT
-  const setExtensionIconSpeed = speed => {
-        browser.browserAction.setBadgeText({ text: `${speed}` });
+  const setExtensionIconSpeed = (speed) => {
+    browser.browserAction.setBadgeText({ text: `${speed}` });
   };
 
   // CONFIGURE SELECTED SPEED BACKGROUNDS
-  const changeSelectedSpeedBg = id => {
+  const changeSelectedSpeedBg = (id) => {
     const chosenSpeedID = document.getElementById(`${id}`);
 
     // Update selected background when new speed chosen
     btnBgReset();
     if (chosenSpeedID) {
-      chosenSpeedID.classList.add("btn-active");
+      chosenSpeedID.classList.add('btn-active');
     }
   };
 
   const btnBgReset = () => {
-    btnBg.forEach(btn => {
-      if (btn.classList.contains("btn-active")) {
-        btn.classList.remove("btn-active");
+    btnBg.forEach((btn) => {
+      if (btn.classList.contains('btn-active')) {
+        btn.classList.remove('btn-active');
       }
     });
   };
 
   const setSpeedBgOnStart = () => {
-    btnBg.forEach(btn => {
+    btnBg.forEach((btn) => {
       if (currentVideoSpeed == btn.id) {
-        btn.classList.add("btn-active");
+        btn.classList.add('btn-active');
       }
     });
 
     if (currentVideoSpeed == customSpeedDisplay.innerHTML) {
-      customSectionBg.style.background = "rgb(26, 26, 26)";
-      customUl.classList.add("custom-btn-active");
+      customSectionBg.style.background = 'rgb(26, 26, 26)';
+      customUl.classList.add('custom-btn-active');
     }
   };
 
   // KEY BINDINGS
 
-  const doc_keyUp = e => {
+  const doc_keyUp = (e) => {
     if (e.ctrlKey && e.keyCode == 37) {
       speedDecrement();
     } else if (e.ctrlKey && e.keyCode == 39) {
@@ -102,10 +102,10 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
   // INITIALIZE EXTENSION
 
   // Retrieve current video speed from Plex
-  const receiveSpeed = resultsArray => {
+  const receiveSpeed = (resultsArray) => {
     currentVideoSpeed = resultsArray[0];
     if (currentVideoSpeed === 1) {
-      customSpeedDisplay.textContent = "1.0";
+      customSpeedDisplay.textContent = '1.0';
     } else {
       customSpeedDisplay.textContent = currentVideoSpeed;
       setSpeedBgOnStart();
@@ -114,33 +114,27 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
 
   await browser.tabs.executeScript(
     {
-      code: "document.getElementsByTagName('video')[0].playbackRate"
+      code: "document.getElementsByTagName('video')[0].playbackRate",
     },
     receiveSpeed
   );
 
-  await browser.tabs.executeScript(
-      {
-        file: "../injections/loadedDataListener.js"
-      }
-  );
+  await browser.tabs.executeScript({
+    file: '../injections/loadedDataListener.js',
+  });
 
   const setSpeedOnChange = () => {
-    getSpeed.addEventListener("click", selectSpeed);
-    getCustomSpeedLeft.addEventListener("click", speedDecrement);
-    getCustomSpeedRight.addEventListener("click", speedIncrement);
-    document.addEventListener(
-      "keyup",
-      doc_keyUp,
-      false
-    );
+    getSpeed.addEventListener('click', selectSpeed);
+    getCustomSpeedLeft.addEventListener('click', speedDecrement);
+    getCustomSpeedRight.addEventListener('click', speedIncrement);
+    document.addEventListener('keyup', doc_keyUp, false);
   };
 
   setSpeedOnChange();
 
   const previousSpeed = await browser.storage.local.get(PREVIOUS_SPEED_RATE);
   if (previousSpeed[PREVIOUS_SPEED_RATE]) {
-    console.log(`Detected previous Plex playback speed ${previousSpeed[PREVIOUS_SPEED_RATE]}`)
-    executeSpeedChanges(previousSpeed[PREVIOUS_SPEED_RATE])
+    console.log(`Detected previous Plex playback speed ${previousSpeed[PREVIOUS_SPEED_RATE]}`);
+    executeSpeedChanges(previousSpeed[PREVIOUS_SPEED_RATE]);
   }
 })();
