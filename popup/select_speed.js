@@ -1,4 +1,6 @@
-(function() {
+const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
+
+(async function () {
   let currentVideoSpeed;
   const customSpeedDisplay = document.getElementById("current-custom-speed");
   const getSpeed = document.getElementById("main-speed-section");
@@ -40,6 +42,7 @@
       customSpeedDisplay.textContent = currentVideoSpeed;
       changeSelectedSpeedBg(speedRate);
       setExtensionIconSpeed(speedRate);
+      browser.storage.local.set({PREVIOUS_SPEED_RATE: speedRate});
     };
 
     const onError = error => {
@@ -128,4 +131,10 @@
   };
 
   setSpeedOnChange();
+
+  const previousSpeed = await browser.storage.local.get(PREVIOUS_SPEED_RATE);
+  if (previousSpeed[PREVIOUS_SPEED_RATE]) {
+    console.log(`Detected previous Plex playback speed ${previousSpeed[PREVIOUS_SPEED_RATE]}`)
+    executeSpeedChanges(previousSpeed[PREVIOUS_SPEED_RATE])
+  }
 })();
