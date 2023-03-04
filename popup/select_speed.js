@@ -36,13 +36,13 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
       code: executeSpeedChange
     });
 
-    const onExecuted = result => {
+    const onExecuted = async result => {
       console.log(`Video playback speed is now ${speedRate}`);
       currentVideoSpeed = speedRate;
       customSpeedDisplay.textContent = currentVideoSpeed;
       changeSelectedSpeedBg(speedRate);
       setExtensionIconSpeed(speedRate);
-      browser.storage.local.set({PREVIOUS_SPEED_RATE: speedRate});
+      await browser.storage.local.set({'plex-pace-last-speed-rate': speedRate});
     };
 
     const onError = error => {
