@@ -5,6 +5,7 @@
   "main": "popup/select_speed.js",
   "dependencies": {},
   "devDependencies": {
+    "@types/firefox-webext-browser": "111.0.0",
     "prettier": "2.8.4"
   },
   "scripts": {
