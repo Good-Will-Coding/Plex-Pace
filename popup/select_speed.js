@@ -126,6 +126,6 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
   const previousSpeed = await browser.storage.local.get(PREVIOUS_SPEED_RATE);
   if (previousSpeed[PREVIOUS_SPEED_RATE]) {
     console.log(`Detected previous Plex playback speed ${previousSpeed[PREVIOUS_SPEED_RATE]}`);
-    executeSpeedChanges(previousSpeed[PREVIOUS_SPEED_RATE]);
+    await executeSpeedChanges(previousSpeed[PREVIOUS_SPEED_RATE]);
   }
 })();
