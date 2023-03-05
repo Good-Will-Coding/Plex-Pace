@@ -24,17 +24,12 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
     currentVideoSpeed = (parseFloat(currentVideoSpeed) + parseFloat(0.1)).toFixed(2);
     executeSpeedChanges(currentVideoSpeed);
   };
-  // Execute speed changes via click handler or keybindings
 
-  const executeSpeedChanges = (speedRate) => {
-    const executeSpeedChange = `document.getElementsByTagName('video')[0].playbackRate = ${speedRate}`;
-
-    // Executing script to change plex video speed
-    const executing = browser.tabs.executeScript({
-      code: executeSpeedChange,
-    });
-
-    const onExecuted = async () => {
+  const executeSpeedChanges = async (speedRate) => {
+    try {
+      await browser.tabs.executeScript({
+        code: `document.getElementsByTagName('video')[0].playbackRate = ${speedRate}`,
+      });
       console.log(`Video playback speed is now ${speedRate}`);
       currentVideoSpeed = speedRate;
       customSpeedDisplay.textContent = currentVideoSpeed;
@@ -43,13 +38,9 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
       await browser.storage.local.set({
         'plex-pace-last-speed-rate': speedRate,
       });
-    };
-
-    const onError = (error) => {
+    } catch (error) {
       console.log(`Error: ${error}`);
-    };
-
-    executing.then(onExecuted, onError);
+    }
   };
 
   // CONFIGURE BADGE ICON TO DISPLAY SPEED TEXT
