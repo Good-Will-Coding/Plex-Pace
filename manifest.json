@@ -1,17 +1,17 @@
 {
   "manifest_version": 2,
-  "name": "Plex Pace Revival",
+  "name": "Plex Pace",
   "version": "1.0",
 
   "description": "",
-  "homepage_url": "https://github.com/BreakBB/Plex-Pace",
+  "homepage_url": "https://github.com/Good-Will-Coding/Plex-Pace",
   "icons": {
     "48": "icons/plex-pace-default.png"
   },
   "permissions": ["activeTab", "storage"],
   "browser_action": {
     "default_icon": "icons/plex-pace-default.png",
-    "default_title": "Plex Pace Revival",
+    "default_title": "Plex Pace",
     "default_popup": "popup/select_speed.html"
   },
   "content_scripts": [
