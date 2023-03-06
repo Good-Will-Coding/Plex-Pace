@@ -10,21 +10,22 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prettier": "node_modules/prettier/"
+    "prettier": "prettier --write .",
+    "prettier-check": "prettier --check ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BreakBB/Plex-Pace.git"
+    "url": "git+https://github.com/Good-Will-Coding/Plex-Pace.git"
   },
   "keywords": [
     "firefox-addon",
     "plex",
     "speed"
   ],
-  "author": "",
+  "author": "Billy Phillips aka Good-Will-Coding",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BreakBB/Plex-Pace/issues"
+    "url": "https://github.com/Good-Will-Coding/Plex-Pace/issues"
   },
-  "homepage": "https://github.com/BreakBB/Plex-Pace#readme"
+  "homepage": "https://github.com/Good-Will-Coding/Plex-Pace#readme"
 }

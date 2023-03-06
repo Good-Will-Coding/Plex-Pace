@@ -1,4 +1,5 @@
 # Plex Pace
+
 ![Plex Place Logo](https://i.ibb.co/3ccrqWz/logo-3.png)
 
 ### Control the speed of Plex Web App player.
