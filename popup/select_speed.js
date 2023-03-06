@@ -27,6 +27,7 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
 
   const executeSpeedChanges = async (speedRate) => {
     try {
+      // TODO when currently not in "playback mode" this errors as no <video> is found. Might be worth to extract another 'injections' file
       await browser.tabs.executeScript({
         code: `document.getElementsByTagName('video')[0].playbackRate = ${speedRate}`,
       });
@@ -118,7 +119,7 @@ const PREVIOUS_SPEED_RATE = 'plex-pace-last-speed-rate';
     getSpeed.addEventListener('click', selectSpeed);
     getCustomSpeedLeft.addEventListener('click', speedDecrement);
     getCustomSpeedRight.addEventListener('click', speedIncrement);
-    document.addEventListener('keyup', doc_keyUp, false);
+    document.addEventListener('keyup', doc_keyUp, false); // TODO: This seems not to work when the popup is not shown
   };
 
   setSpeedOnChange();
