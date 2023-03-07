@@ -1,7 +1,7 @@
 html,
 body {
   width: 100px;
-  font-family: "Rubik", sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 0.75rem;
   background-color: rgb(243, 241, 241);
 }
@@ -71,20 +71,20 @@ ul {
   list-style-type: none;
   background-color: rgb(65, 65, 65);
   display: flex;
-  padding: 0px 10px;
+  padding: 0 10px;
 }
 
 li {
   display: inline;
-  margin: 0px 10px;
+  margin: 0 10px;
 }
 
 .btn-left {
   text-align: center;
   max-width: 50px;
   font-size: 2.5em;
-  padding: 0px 2px;
-  margin: 0px -4px;
+  padding: 0 2px;
+  margin: 0 -4px;
   font-weight: bold;
   cursor: pointer;
   color: #e5a00d;
@@ -93,8 +93,8 @@ li {
 }
 
 .btn-right {
-  padding: 0px 2px;
-  margin: 0px 50px;
+  padding: 0 2px;
+  margin: 0 50px;
 
   text-align: center;
   max-width: 50px;
